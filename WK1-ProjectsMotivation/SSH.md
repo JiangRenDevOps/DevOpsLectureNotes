@@ -2,6 +2,10 @@
 
 This is to demo how to use SSH.
 
+# Pre-requisite
+
+A Linux box or a Macbook
+
 # Task 1: Generate a ssh key pair and send your public key to the channel
 Command:
 ```
