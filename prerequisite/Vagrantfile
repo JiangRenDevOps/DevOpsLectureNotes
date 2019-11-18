@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
 
       # awscli
       pip3 install --upgrade --user awscli
-      echo "export PATH=/home/ec2-user/.local/bin:$PATH" >> /home/vagrant/.bashrc
+      echo "export PATH=/home/vagrant/.local/bin:$PATH" >> /home/vagrant/.bashrc
       aws --version
 
       # chrome
