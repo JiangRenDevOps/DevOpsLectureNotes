@@ -20,7 +20,7 @@ This is the hands-on for the Jiangren CDN project.
 
 6. In "Object Caching", select "Customize"
 
-7. In "Minimum TTL", input "3600" which stands for one hour
+7. In "Minimum TTL", input "86400" which stands for one day
 
 8. In "Compress Objects Automatically", select "yes"
 
@@ -28,17 +28,44 @@ This is the hands-on for the Jiangren CDN project.
 
 10. Wait util the distribution status is "Deployed" (it takes about 10 minutes)
 
-11. Open the domain name "e.g. xxx.cloudfront.net" to confirm you can get a jiangren website. 
+11. Open the domain name "e.g. xxx.cloudfront.net" to confirm you can get a jiangren website
 
-# Task 2: Test the speed of jiangren.com.au website
+![Alt text](images/CDN1.png?raw=true)
+![Alt text](images/CDN2.png?raw=true)
+
+
+# Task 2: Test the speed of jiangren.com.au website across 25 locations in the world
+
+1. Open https://www.dotcom-tools.com/website-speed-test.aspx in 3 browser tabs
+
+2. Test "jiangren.com.au" in the first browser tabs
+
+3. Wait for 10 seconds
+
+4. Test "jiangren.com.au" in the second browser tabs
+
+5. Wait for 10 seconds
+
+6. Test "jiangren.com.au" in the third browser tabs
+
+7. Wait until the test finishes and see if there is any trend among these three tests
+
+# Task 3: Test the speed of the CDN website across 25 locations in the world
 
 1. Open https://www.dotcom-tools.com/website-speed-test.aspx in 3 browser tabs.
 
-2. Test "jiangren.com.au" in all of the 3 browser tabs. It will run test across 25 locations in the world.
+2. Test your CDN site "e.g. xxx.cloudfront.net" in the first browser tabs
 
-# Task 3: Test the speed of the CDN website
+3. Wait for 10 seconds
 
-1. Open https://www.dotcom-tools.com/website-speed-test.aspx in 3 browser tabs.
+4. Test your CDN site "e.g. xxx.cloudfront.net" in the second browser tabs
 
-2. Test your CDN site "e.g. xxx.cloudfront.net" in all of the 3 browser tabs. It will run test across 25 locations in the world.
+5. Wait for 10 seconds
 
+6. Test your CDN site "e.g. xxx.cloudfront.net" in the third browser tabs
+
+7. Wait until the test finishes and see if there is any trend among these three tests
+
+# Task 4: Explore the "Reports & analytics" in Cloudfront console.
+![Alt text](images/CDN3.png?raw=true)
+Feel free to explore other menus in the "Reports & analytics" area.

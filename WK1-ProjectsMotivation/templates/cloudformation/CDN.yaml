@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters: 
+  CommentParameter: 
+    Type: String
+    Default: Created by Cloudformation
+Resources:
+  CloudFrontDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Origins:
+        - DomainName: jiangren.com.au
+          Id: myCustomOrigin
+          CustomOriginConfig:
+            HTTPPort: '80'
+            HTTPSPort: '443'
+            OriginProtocolPolicy: https-only
+        Enabled: 'true'
+        Comment: 
+          Ref: CommentParameter
+        DefaultCacheBehavior:
+          TargetOriginId: myCustomOrigin
+          Compress: 'true'
+          MinTTL: 86400
+          ViewerProtocolPolicy: allow-all
+          ForwardedValues:
+            QueryString: 'false'
+            Cookies:
+              Forward: none
+        PriceClass: PriceClass_All
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: 'true'
+
+Outputs:
+  CloudFrontEndpoint:
+    Description: "Endpoint for Cloudfront Distribution"
+    Value:  { 'Fn::GetAtt': [CloudFrontDistribution, DomainName] }

@@ -44,17 +44,17 @@ Please send your public key to the wechat channel. Your teacher will add your pu
 # Task 2: SSH to a remote server
 Command:
 ```
-ssh ec2-user@xxx
+ssh ec2-user@54.206.36.48
 touch "Your Name"
 ```
 Example:
 ```
-ssh ec2-user@xxx
+ssh ec2-user@54.206.36.48
 touch "Davis"
 ```
 
 # Task 3: Download a local file to the server
 ```
-scp ec2-user@xxx:test.html .
+scp ec2-user@54.206.36.48:test.html .
 ```
 You should be able to open the test.html from your laptop.
