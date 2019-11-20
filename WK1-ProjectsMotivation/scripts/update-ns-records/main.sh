@@ -9,7 +9,7 @@ while true; do
     scp -r ec2-user@54.206.36.48:~/*.jiangren.mooo.com . > /dev/null
     sleep 1
     for record in $(ls *.jiangren.mooo.com); do
-        if [ -f "$record.done" ]; then
+        if [ -z "$(diff record record.done)" ]; then
             continue
         fi
         echo "Update record $record"
