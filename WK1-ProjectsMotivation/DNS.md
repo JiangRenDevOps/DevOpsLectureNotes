@@ -14,10 +14,19 @@ AWS Account
 ![Alt text](images/DNS1.png?raw=true)
 You can find a hosted zone created.
 ![Alt text](images/DNS2.png?raw=true)
-3. Click "Create Record Set" to create a DNS name. In the right panel, select "Alias" as "Yes", then select your Cloudfront distribution from the "Alias Target". Click "Create" button to create a DNS record.
+3. Click "Create Record Set" to create a DNS name. In the right panel, select "Alias" as "Yes", then input your Cloudfront distribution domain name "e.g. d3pwhpmkfqjfqz.cloudfront.net" to the "Alias Target". Click "Create" button to create a DNS record.
 ![Alt text](images/DNS3.png?raw=true)
 
-# Task 2: Add CNAME with Certification
+# Step 2: Set up DNS Delegation
+DNS and CDN are configured. The final step is to give your NS record to teacher via SSH so your DNS delegation will be set up.
+1. Go back to Route53 console, copy your NS record info and save it to a file. 
+![Alt text](images/DNS15.png?raw=true)
+2. Upload the file to the server via: `scp your_name.jiangren.mooo.com ec2-user@54.206.36.48:/home/ec2-user`
+3. Validate your NS record is updated via `dig NS your_name.jiangren.mooo.com`.
+4. Now, you should be able to view the site.
+![Alt text](images/DNS16.png?raw=true)
+
+# Task 3: Add CNAME with Certification
 1. Go back to AWS Cloudfront console: https://console.aws.amazon.com/cloudfront/home and select your Distribution.
 ![Alt text](images/DNS4_1.png?raw=true)
 2. Click "Edit" button to continue edit.
@@ -40,11 +49,3 @@ You should get a successful result.
 ![Alt text](images/DNS13.png?raw=true)
 10. Click "Yes, Edit" in the bottom right to save it. It should take 10 minutes or so to apply cloudfront changes to all the edge servers.
 ![Alt text](images/DNS14.png?raw=true)
-# Step 3: Set up DNS Delegation
-DNS and CDN are configured. The final step is to give your NS record to teacher via SSH so your DNS delegation will be set up.
-1. Go back to Route53 console, copy your NS record info and save it to a file. 
-![Alt text](images/DNS15.png?raw=true)
-2. Upload the file to the server via: `scp your_name.jiangren.mooo.com ec2-user@54.206.36.48:/home/ec2-user`
-3. Validate your NS record is updated via `dig NS your_name.jiangren.mooo.com`.
-4. Now, you should be able to view the site.
-![Alt text](images/DNS16.png?raw=true)
