@@ -3,17 +3,20 @@ Parameters:
   YourDomainNameParameter: 
     Type: String
     Default: "your_name.jiangren.mooo.com"
+  TargetDomainNameParameter: 
+    Type: String
+    Default: jiangren.com.au
 Resources:
   MyRoute53RecordSet:
     Type: 'AWS::Route53::RecordSet'
     Properties:
       HostedZoneId: !Ref MyHostedZone
       Name: !Join [ ".", [ 'www', !Ref YourDomainNameParameter ] ] 
-      Comment: My DNS cname to Jiangren.com
+      Comment: My DNS cname to jiangren.com.au
       Type: CNAME
       ResourceRecords:
-        - 'jiangren.com'
-      TTL: 600
+        - !Ref TargetDomainNameParameter
+      TTL: 15
   MyHostedZone:
     Type: "AWS::Route53::HostedZone"
     Properties: 
