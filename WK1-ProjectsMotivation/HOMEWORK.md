@@ -7,7 +7,13 @@ Configure AWS credentials in your local laptop and use AWS CLI to create a cloud
 Tips: read and follow the guidelines in “Quickly Configuring the AWS CLI” section: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 
 You will need to give cloudformation and cloudfront permissions. Or you can start with attach an “Admin” permission (security risk and anti-pattern).
-## Answer
+
+## Short Answer
+Configure AWS credential and execute command below to create a stack.
+```
+aws cloudformation create-stack --stack-name My-CDN-Stack --template-body file://CDN.yaml --parameters ParameterKey=CommentParameter,ParameterValue=FromAWSCLI
+```
+## Long Answer
 1. Login to IAM user: https://console.aws.amazon.com/iam/home?region=ap-southeast-2#/users and click "Add user" button;
 ![Alt text](images/HOMEWORK1.png?raw=true)
 2. Input user name and tick "Programmatic access" checkbox to allow AWS CLI to use it;
@@ -40,8 +46,10 @@ Tips:
 Create hosted zone: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html
 Create recordset:
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
+## Short Answer
+https://raw.githubusercontent.com/JiangRenDevOps/DevOpsLectureNotes/master/WK1-ProjectsMotivation/templates/cloudformation/DNS.yaml
 
-## Answer
+## Long Answer
 1. Download the cloudformation template [DNS](https://raw.githubusercontent.com/JiangRenDevOps/DevOpsLectureNotes/master/WK1-ProjectsMotivation/templates/cloudformation/DNS.yaml) and have a read. There are two resources. One is Route53 Hosted zone and anther one is Recordset.
 2. Create a cloudformation stack in command line via `aws cloudformation create-stack --stack-name My-DNS-Stack --template-body file://DNS.yaml --parameters ParameterKey=YourDomainNameParameter,ParameterValue=your_name.jiangren.mooo.com`
 ![Alt text](images/HOMEWORK12.png?raw=true)
