@@ -13,6 +13,8 @@ Build a image named `jr/web-nginx`.
 cd 2.web-nginx
 
 docker build -t jr/web-helloworld .
+
+docker images
 ```
 
 # Run

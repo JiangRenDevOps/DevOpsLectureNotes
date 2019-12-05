@@ -13,6 +13,8 @@ Build a image named `jr/console-helloworld`.
 cd 1.console-helloworld
 
 docker build -t jr/console-helloworld .
+
+docker images
 ```
 
 # Run

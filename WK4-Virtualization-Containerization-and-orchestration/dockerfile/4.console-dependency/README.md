@@ -13,6 +13,7 @@ Build a image named `jr/console-citymatcher`.
 cd 4.console-dependency
 
 docker build -t jr/console-citymatcher .
+docker images
 ```
 
 # Run

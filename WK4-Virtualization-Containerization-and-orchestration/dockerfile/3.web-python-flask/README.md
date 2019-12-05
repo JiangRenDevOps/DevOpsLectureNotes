@@ -13,6 +13,7 @@ Build a image named `jr/web-python-flask`.
 cd 3.web-sitematcher
 
 docker build -t jr/web-citymatcher .
+docker images
 ```
 
 # Run
