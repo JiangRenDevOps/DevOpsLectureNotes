@@ -1,0 +1,10 @@
+version: '3'    
+
+services:
+  hello:
+    image: nginxdemos/hello
+    ports:
+      - "80:80"    
+    deploy:
+      mode: replicated
+      replicas: 10

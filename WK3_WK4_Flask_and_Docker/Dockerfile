@@ -5,7 +5,8 @@ RUN apk update && apk upgrade
 #RUN mkdir $HOME/.pip/
 #COPY ./pip.conf $HOME/.pip/
 RUN pip install flask
-RUN mkdir -p /var/www
+RUN mkdir -p /var/www/uploaded_files
+COPY templates /var/www/templates
 COPY app.py /var/www
 WORKDIR /var/www
 

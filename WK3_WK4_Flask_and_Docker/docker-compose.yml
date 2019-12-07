@@ -10,7 +10,7 @@ server:
 
 web:
   restart: always
-  image: my_docker_flask:latest
+  build: .
   working_dir: /var/www
   expose:
     - "5000"
