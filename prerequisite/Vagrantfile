@@ -58,6 +58,24 @@ Vagrant.configure("2") do |config|
       usermod -aG docker vagrant
       newgrp docker 
 
+      # Install go
+      snap install go --classic
+      echo 'eval $(go env)' >> /home/vagrant/.bashrc
+      echo 'export PATH=$GOPATH/bin:$PATH' >> /home/vagrant/.bashrc
+
+      # Install kind
+      GO111MODULE="on" go get sigs.k8s.io/kind@v0.6.1
+
+      # Install kubectl
+      snap install kubectl --classic
+
+      # Git clone repository
+      cd /home/vagrant
+      mkdir -p git
+      cd git
+      git clone https://github.com/JiangRenDevOps/DevOpsLectureNotes.git
+      chown -R vagrant:vagrant /home/vagrant
+
       # zsh
       # apt-get install -y zsh
       # chsh -s /usr/bin/zsh vagrant
