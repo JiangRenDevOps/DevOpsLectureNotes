@@ -1,8 +1,12 @@
 #!/bin/bash
 set -e
 
+# Reset docker
 docker swarm leave --force
+docker kill $(docker ps -q)
+docker rm $(docker ps -aq)
 
+# init swarm
 docker swarm init
 
 # Get join token:
