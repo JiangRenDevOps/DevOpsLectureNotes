@@ -64,16 +64,23 @@ Vagrant.configure("2") do |config|
       echo 'export PATH=$GOPATH/bin:$PATH' >> /home/vagrant/.bashrc
 
       # Install kind
-      GO111MODULE="on" go get sigs.k8s.io/kind@v0.6.1
+      export GO111MODULE="on" 
+      go get sigs.k8s.io/kind@v0.6.1
+      mv ~/go /home/vagrant
 
       # Install kubectl
       snap install kubectl --classic
 
+      # Install vscode
+      snap install code --classic
+
       # Git clone repository
       cd /home/vagrant
-      mkdir -p git
-      cd git
-      git clone https://github.com/JiangRenDevOps/DevOpsLectureNotes.git
+      if [ ! -f git ]; then
+        mkdir -p git
+        cd git
+        git clone https://github.com/JiangRenDevOps/DevOpsLectureNotes.git
+      fi
       chown -R vagrant:vagrant /home/vagrant
 
       # zsh
