@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jiangren
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp
+  namespace: jiangren
+spec:
+  replicas: 12
+  selector:
+    matchLabels:
+      app: demoapp
+  template:
+    metadata:
+      labels:
+        app: demoapp
+    spec:
+      containers:
+        - name: echo
+          image: stevesloka/echo-server
+          command: ["echo-server"]
+          args:
+            - --echotext=This is the jiangren test site!
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: demoapp
+  name: demoapp
+  namespace: jiangren
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: demoapp
+  type: ClusterIP
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: demoapp-proxy
+  namespace: jiangren
+  labels:
+    app: demoapp
+spec:
+  virtualhost:
+    fqdn: localhost
+  routes:
+  - services:
+    - name: demoapp
+      port: 80

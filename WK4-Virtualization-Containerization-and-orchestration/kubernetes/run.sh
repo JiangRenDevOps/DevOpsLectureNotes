@@ -9,6 +9,6 @@ fi
 
 ./delete-cluster.sh
 ./create-cluster.sh
+
+./deploy-demoapp.sh
 ./deploy-dashboard.sh
-./deploy-nginxdemos.sh
-./create-nginxdemos-service.sh

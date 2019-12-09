@@ -41,7 +41,3 @@ docker node ls
 docker stack deploy -c docker-compose.yaml myswarm
 
 docker service ls
-
-# 
-# docker service ps 
-# docker swarm leave --force

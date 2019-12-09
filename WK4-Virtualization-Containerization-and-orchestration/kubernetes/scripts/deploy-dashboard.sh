@@ -6,7 +6,6 @@ set -e
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta6/aio/deploy/recommended.yaml
 
 kubectl apply -f config/dashboard-adminuser.yaml
-kubectl apply -f config/dashboard-adminuser-bind.yaml
 
 token=$(kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}') | grep 'token:' | cut -d ':' -f 2 | sed 's# ##g')
 
