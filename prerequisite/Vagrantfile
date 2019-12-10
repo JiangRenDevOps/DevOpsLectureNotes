@@ -15,8 +15,25 @@ Vagrant.configure("2") do |config|
               software-properties-common \
               net-tools \
               nginx \
-              npm
-      
+              npm \
+              htop \
+              atop \
+              docker.io \
+              unzip
+
+      # docker
+      systemctl start docker
+      systemctl enable docker
+      usermod -aG docker $USER
+      docker run hello-world
+
+      # terraform
+      wget https://releases.hashicorp.com/terraform/0.12.17/terraform_0.12.17_linux_amd64.zip
+      rm -rf terraform
+      unzip terraform_0.12.17_linux_amd64.zip
+      mv terraform /usr/local/bin
+      terraform version
+
       # ansible
       apt-add-repository ppa:ansible/ansible
       
