@@ -1,10 +1,8 @@
 #!/bin/bash
 set -e
 
-# Reset docker
-docker swarm leave --force
-docker kill $(docker ps -q)
-docker rm $(docker ps -aq)
+# cleanup first
+./cleanup.sh
 
 # init swarm
 docker swarm init

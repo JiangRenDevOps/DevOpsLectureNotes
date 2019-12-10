@@ -9,8 +9,8 @@ if [ "$(docker-compose --version 2>/dev/null)" == "" ]; then
 fi
 
 # Clean up
-docker kill $(docker ps -q)
-docker rm $(docker ps -aq)
+docker ps -q | xargs -r docker kill
+docker ps -qa | xargs -r docker rm
 
 # Start compose
 docker-compose up

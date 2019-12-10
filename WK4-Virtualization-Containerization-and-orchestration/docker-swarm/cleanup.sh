@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-docker swarm leave --force
+docker swarm leave --force | cat
 
 # remove all the containers
 docker ps -q | xargs -r docker kill

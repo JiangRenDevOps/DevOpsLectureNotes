@@ -10,5 +10,7 @@ fi
 ./delete-cluster.sh
 ./create-cluster.sh
 
+./create-namespace.sh
 ./deploy-demoapp.sh
+./deploy-demojob.sh
 ./deploy-dashboard.sh
