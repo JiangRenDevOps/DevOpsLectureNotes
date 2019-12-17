@@ -1,0 +1,138 @@
+---
+    # Original Author: https://github.com/kurron/cloud-formation-elasticache
+    # Cannot get this to work for some reason
+    #AWSTemplateFormatVersion: AWSTemplateFormatVersion: '2010-09-09'
+    
+    Description: This template places a new ElastiCache into an existing VPC.
+    
+    # These show up in the console and are expected to be provided by the operator
+    Parameters:
+        Project:
+            Description: 'Project name this cluster is has been created for'
+            Type: 'String'
+            Default: 'Jiangren DevOps Bootcamp'
+    
+        Creator:
+            Description: 'Tool or person creating this cluster'
+            Type: 'String'
+            Default: 'CloudFormation'
+    
+        Environment:
+            Description: 'Context the cluster will be used in.  Common values are production, testing and development.'
+            Type: 'String'
+            Default: 'development'
+    
+        Notes:
+            Description: 'Notes to apply, normally edited in the console.'
+            Type: 'String'
+            Default: 'No notes'
+    
+        CachePort:
+            Description: 'The port number on which each of the cache nodes will accept connections.'
+            Type: 'Number'
+            Default: 6379
+    
+        InstanceType:
+            Description: 'How large of a box to run your cluster on'
+            Type: 'String'
+            Default: 'cache.t1.micro'
+    
+        VPC:
+            Description: 'VPC ID we are inserting into'
+            Type: AWS::EC2::VPC::Id
+            AllowedPattern : '.+'
+    
+        Subnets:
+            Description: 'Which subnets the EC2 instances should be deployed to.'
+            Type: List<AWS::EC2::Subnet::Id>
+            AllowedPattern : '.+'
+    
+    
+    Resources:
+        # unlimited inbound access -- primarily for testing of the network settings
+        WideOpenSecurityGroup:
+            Type: AWS::EC2::SecurityGroup
+            Properties:
+                GroupDescription: 'Redis port from anywhere'
+                VpcId:
+                    Ref: 'VPC'
+                SecurityGroupIngress:
+                    - IpProtocol: 'tcp'
+                      FromPort:
+                          Ref: CachePort
+                      ToPort:
+                          Ref: CachePort
+                      CidrIp: 0.0.0.0/0
+                Tags:
+                    - Key: 'Name'
+                      Value:
+                          'Fn::Join': [ ':', [ 'Cache', !Ref 'AWS::StackName' ] ]
+                    - Key: 'Project'
+                      Value:
+                          Ref: 'Project'
+                    - Key: 'Purpose'
+                      Value: 'Redis access'
+                    - Key: 'Creator'
+                      Value:
+                          Ref: 'Creator'
+                    - Key: 'Environment'
+                      Value:
+                          Ref: 'Environment'
+                    - Key: 'Freetext'
+                      Value: 'Unsafe! Only useful for network testing.'
+    
+        SubnetGroup:
+            Type: AWS::ElastiCache::SubnetGroup
+            Properties:
+                Description: "Cache Subnet Group"
+                SubnetIds:
+                    Ref: Subnets
+    
+        ElastiCacheCluster:
+            Type: AWS::ElastiCache::ReplicationGroup
+            Properties:
+                AutomaticFailoverEnabled: false
+                AutoMinorVersionUpgrade: true
+                CacheNodeType:
+                    Ref: InstanceType
+                CacheSubnetGroupName:
+                    Ref: SubnetGroup
+                Engine: 'redis'
+                NumCacheClusters: 1
+                Port:
+                    Ref: CachePort
+                ReplicationGroupDescription: 'Redis cluster'
+                SecurityGroupIds:
+                    - Ref: 'WideOpenSecurityGroup'
+                Tags:
+                    - Key: 'Name'
+                      Value:
+                          'Fn::Join': [ ':', [ 'Cache', !Ref 'AWS::StackName' ] ]
+                    - Key: 'Project'
+                      Value:
+                          Ref: 'Project'
+                    - Key: 'Purpose'
+                      Value: 'Redis Cache'
+                    - Key: 'Creator'
+                      Value:
+                          Ref: 'Creator'
+                    - Key: 'Environment'
+                      Value:
+                          Ref: 'Environment'
+                    - Key: 'Freetext'
+                      Value:
+                          Ref: 'Notes'
+    
+    Outputs:
+        PrimaryAddress:
+            Description: 'The DNS address of the primary read-write cache node.'
+            Value: !GetAtt ElastiCacheCluster.PrimaryEndPoint.Address
+        PrimaryPort:
+            Description: 'The number of the port that the primary read-write cache engine is listening on.'
+            Value: !GetAtt ElastiCacheCluster.PrimaryEndPoint.Port
+        SecondaryAddresses:
+            Description: 'A string with a list of endpoints for the read-only replicas.'
+            Value: !GetAtt ElastiCacheCluster.ReadEndPoint.Addresses
+        SecondaryPorts:
+            Description: 'A string with a list of ports for the read-only replicas. '
+            Value: !GetAtt ElastiCacheCluster.ReadEndPoint.Ports
