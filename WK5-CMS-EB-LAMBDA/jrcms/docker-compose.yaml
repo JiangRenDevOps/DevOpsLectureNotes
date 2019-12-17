@@ -13,4 +13,5 @@ services:
     redis:
         image: redis:latest
         restart: always
-        
+        ports:
+            - "6379:6379"

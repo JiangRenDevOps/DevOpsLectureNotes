@@ -1,7 +1,13 @@
 $(".dropdown-menu a").click(function(){
-    var item = $(this).text();
-    loadContent(item);
- });
+    loadContent($(this).text());
+});
+
+$(".dropdown-menu input").keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        loadContent($(this).val());
+    }
+});
 
 $('#updateButton').click(function() {
     $.ajax({
