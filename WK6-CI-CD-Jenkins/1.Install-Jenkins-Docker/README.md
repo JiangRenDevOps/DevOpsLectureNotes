@@ -18,7 +18,7 @@ cd jenkins_home
 ## 2. Start a Jenkins container
 ```
 docker run --name jenkins \
-           -u 0:$GID \
+           -u root \
            -d \
            -v $(pwd):/var/jenkins_home \
            -v /var/run/docker.sock:/var/run/docker.sock \
@@ -27,7 +27,7 @@ docker run --name jenkins \
            jenkinsci/blueocean
 ```
 Note:
-- `-u 0:$GID` specifies UID and GID of the user in Jenkins.
+- `-u root` configures to run Jenkins by root user.
 - `-d` detaches the container
 - `-v $(pwd):/var/jenkins_home` mounts the current directory to Jenkins home inside the container
 - `-v /var/run/docker.sock:/var/run/docker.sock` mounts Docker socks
@@ -40,7 +40,7 @@ Note:
 
 ## 4. Get your password by opening `secrets/initialAdminPassword` file in the directory you created in the first step.
 ```
-cat secrets/initialAdminPassword
+sudo cat secrets/initialAdminPassword
 ```
 
 ## 5. Continue installation in step #3 with password from step #4.
