@@ -18,13 +18,14 @@ Alternatively, you can follow https://docs.ansible.com/ansible/latest/installati
 ```
 cat ~/.ssh/id_rsa.pub
 ```
-- Use this [cloudformation template](CFN-EC2.yaml) to create three EC2 instances.
+- Use this [cloudformation template](CFN-EC2.yaml) to create three EC2 instances: https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/template
 
-## Task #3: Create an IAM user and configure two environment variables
+## Task #3: Create an IAM user and configure three environment variables
 Get the value from your AWS console.
 ```
 export AWS_ACCESS_KEY=YOUR_AWS_ACCESS_KEY
 export AWS_SECRET_KEY=YOUR_AWS_SECRET_KEY
+export ANSIBLE_HOST_KEY_CHECKING=False
 ```
 
 ## Task #4: Run hello world to validate the setup of the EC2 instances

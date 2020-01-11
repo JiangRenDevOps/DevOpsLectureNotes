@@ -7,14 +7,14 @@
     - common
 
 - name: Install Redis
-  hosts: all
+  hosts: tag_Name_redis
   user: ubuntu
   become: yes
   roles:
     - redis
 
 - name: Install jrcms
-  hosts: all
+  hosts: tag_Name_web
   user: ubuntu
   become: yes
   roles:
