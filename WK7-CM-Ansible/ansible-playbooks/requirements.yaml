@@ -1,0 +1,5 @@
+---
+roles:
+  # Install a role from Ansible Galaxy.
+  - src: geerlingguy.docker
+

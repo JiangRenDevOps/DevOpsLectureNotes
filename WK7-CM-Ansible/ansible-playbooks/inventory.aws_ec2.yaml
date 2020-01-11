@@ -1,0 +1,10 @@
+---
+plugin: aws_ec2
+# Populate inventory with instances in these regions
+regions:
+  - us-east-1
+filters:
+  tag:project: jrcms
+keyed_groups:
+  - prefix: tag
+    key: tags

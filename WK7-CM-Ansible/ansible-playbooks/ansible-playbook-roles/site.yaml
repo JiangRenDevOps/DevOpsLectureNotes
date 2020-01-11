@@ -1,0 +1,21 @@
+---
+- name: Install Docker
+  hosts: all
+  user: ubuntu
+  become: yes
+  roles:
+    - common
+
+- name: Install Redis
+  hosts: all
+  user: ubuntu
+  become: yes
+  roles:
+    - redis
+
+- name: Install jrcms
+  hosts: all
+  user: ubuntu
+  become: yes
+  roles:
+    - jrcms
