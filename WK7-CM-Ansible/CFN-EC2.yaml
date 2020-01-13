@@ -80,20 +80,11 @@
     Outputs:
       EC2Instance1:
         Description: web server 1
-        Value:
-          Fn::GetAtt:
-          - EC2Instance1
-          - PublicIp
+        Value: !GetAtt EC2Instance1.PublicIp
       EC2Instance2:
         Description: web server 2
-        Value:
-          Fn::GetAtt:
-          - EC2Instance2
-          - PublicIp
+        Value: !GetAtt EC2Instance2.PublicIp
       EC2Instance3:
         Description: redis server
-        Value:
-          Fn::GetAtt:
-          - EC2Instance3
-          - PublicIp
+        Value: !GetAtt EC2Instance3.PublicIp
     

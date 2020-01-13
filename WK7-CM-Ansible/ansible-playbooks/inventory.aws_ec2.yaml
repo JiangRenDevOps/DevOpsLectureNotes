@@ -7,4 +7,5 @@ filters:
   tag:project: jrcms
 keyed_groups:
   - prefix: tag
-    key: tags
+    key: tags['Name']
+    
