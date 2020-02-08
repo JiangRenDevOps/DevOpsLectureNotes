@@ -1,0 +1,50 @@
+---
+    - hosts: all
+      become: yes
+      become_user: root
+      user: ubuntu
+      tasks:
+        - name: Ensure Ansible runs on start
+          cron:
+            name: "Excute ansible on start"
+            special_time: reboot
+            job: "ansible-playbook localhost /app/site.yaml"
+    
+    - hosts: all
+      become: yes
+      become_user: root
+      user: ubuntu
+      vars:
+        pip_install_packages:
+          - name: docker
+      roles:
+        - geerlingguy.docker
+        - geerlingguy.pip
+    
+    - hosts: all
+      become: yes
+      user: ubuntu
+      tasks:
+        - name: Start redis container
+          docker_container:
+            name: redis
+            image: redis
+            state: started  
+            ports:
+                - "6379:6379"
+    
+    - hosts: all
+      become: yes
+      user: ubuntu
+      tasks:
+        - name: Start jrcms container
+          docker_container:
+            name: jrcms
+            image: davisliu/jrcms
+            state: started
+            ports:
+                - "80:8080"
+            env:
+                REDIS_HOST: "{{ groups['tag_redis'][0] }}"
+    
+    
