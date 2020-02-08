@@ -13,3 +13,26 @@ This terraform project creates a S3 bucket to store terraform states.
 Global AWS resources that should be created only once-off.
 - vpc
 - s3 to store Terraform state
+- security group
+
+## 3.elk
+
+ELK infrastructure
+
+## 4.app
+
+CMS application (can be replaced by other apps)
+
+# To execute
+
+cd to individual folder and use `../terraform.sh apply` to execute.
+
+For example:
+```
+cd 1.s3-state
+../terraform.sh apply
+```
+
+# To distroy
+
+cd to individual folder and use `../terraform.sh destroy` to execute.
