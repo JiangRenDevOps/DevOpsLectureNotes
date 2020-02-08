@@ -1,0 +1,68 @@
+---
+    - hosts: localhost
+      connection: local 
+      become: yes
+      become_user: root
+      user: ubuntu
+      tasks:
+        - name: Ensure Ansible runs on start
+          cron:
+            name: "Excute ansible on start"
+            special_time: reboot
+            job: "ansible-playbook /site.yaml"
+   
+    # https://github.com/deviantony/docker-elk
+    - hosts: localhost
+      connection: local 
+      become: yes
+      become_user: root
+      user: ubuntu
+      vars:
+        filebeat_inputs:
+            - type: log
+              paths:
+                - "/var/log/*.log"
+              encoding: utf-8
+            - type: docker
+              containers.ids:
+                - "*"
+        filebeat_output_logstash_enabled: true
+        filebeat_output_logstash_hosts:
+          - "ELK_IP:5000"
+      roles:
+        - geerlingguy.filebeat
+
+    - hosts: localhost
+      connection: local 
+      become: yes
+      become_user: root
+      user: ubuntu
+      vars:
+        pip_install_packages:
+          - name: docker
+      roles:
+        - geerlingguy.docker
+        - geerlingguy.pip
+
+    - hosts: localhost
+      connection: local 
+      become: yes
+      become_user: root
+      user: ubuntu
+      tasks:
+        - name: Clone ELK repo
+          git:
+            repo: 'https://github.com/davisliu11/jrcms.git'
+            dest: /jrcms
+
+    - hosts: localhost
+      connection: local 
+      become: yes
+      user: ubuntu
+      tasks:
+        - name: Start jrcms container
+          shell: |
+            cd /jrcms
+            docker-compose up > /var/log/app.log
+    
+
