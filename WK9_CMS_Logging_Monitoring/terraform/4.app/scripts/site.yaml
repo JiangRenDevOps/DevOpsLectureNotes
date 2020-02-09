@@ -41,10 +41,10 @@
       tasks:
         - name: Update configuration
           shell: |
-          sed -i 's/#protocol: "https"/protocol: "http"/g' /etc/filebeat/filebeat.yml
-          sed -i 's/#username: "admin"/username: "elastic"/g' /etc/filebeat/filebeat.yml
-          sed -i 's/#password: "s3cr3t"/password: "changeme"/g' /etc/filebeat/filebeat.yml
-          /etc/init.d/filebeat restart | cat
+            sed -i 's/#protocol: "https"/protocol: "http"/g' /etc/filebeat/filebeat.yml
+            sed -i 's/#username: "admin"/username: "elastic"/g' /etc/filebeat/filebeat.yml
+            sed -i 's/#password: "s3cr3t"/password: "changeme"/g' /etc/filebeat/filebeat.yml
+            /etc/init.d/filebeat restart | cat
 
     - hosts: localhost
       connection: local 
