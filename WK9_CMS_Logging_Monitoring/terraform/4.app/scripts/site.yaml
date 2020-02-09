@@ -26,6 +26,7 @@
             - type: docker
               containers.ids:
                 - "*"
+        filebeat_output_logstash_enabled: false
         filebeat_output_elasticsearch_enabled: true
         filebeat_output_elasticsearch_hosts:
           - "ELK_IP:9200"
@@ -37,11 +38,13 @@
       become: yes
       become_user: root
       user: ubuntu
-      shell: |
-      sed -i 's/#protocol: "https"/protocol: "http"/g' /etc/filebeat/filebeat.yml
-      sed -i 's/#username: "admin"/username: "elastic"/g' /etc/filebeat/filebeat.yml
-      sed -i 's/#password: "s3cr3t"/password: "changeme"/g' /etc/filebeat/filebeat.yml
-      /etc/init.d/filebeat restart
+      tasks:
+        - name: Update configuration
+          shell: |
+          sed -i 's/#protocol: "https"/protocol: "http"/g' /etc/filebeat/filebeat.yml
+          sed -i 's/#username: "admin"/username: "elastic"/g' /etc/filebeat/filebeat.yml
+          sed -i 's/#password: "s3cr3t"/password: "changeme"/g' /etc/filebeat/filebeat.yml
+          /etc/init.d/filebeat restart | cat
 
     - hosts: localhost
       connection: local 
