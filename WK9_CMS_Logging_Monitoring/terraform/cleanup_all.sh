@@ -9,4 +9,4 @@ for folder in $(ls | grep -v '.sh' | sort -r); do
 	cd ..
 done
 
-echo Please remove the S3 bucket (s3-terraform-state-storage-*) that stores terraform state.
+echo 'Please remove the S3 bucket (s3-terraform-state-storage-*) that stores terraform state.'
