@@ -13,7 +13,6 @@ function terraform() {
     volumn_to_mount="-v ${script_folder}:/app -v $tmp_file:$tmp_file -v $HOME/.aws:/root/.aws -v $HOME/.ssh:/root/.ssh"
     current_folder_name="$(basename "$(pwd)")"
     docker run --rm -it -w /app/${current_folder_name} ${volumn_to_mount} hashicorp/terraform $@
-    #docker run --entrypoint /bin/sh --rm -it -w /app/${current_folder_name} ${volumn_to_mount} hashicorp/terraform $@
 }
 
 # Generate backend parameter file

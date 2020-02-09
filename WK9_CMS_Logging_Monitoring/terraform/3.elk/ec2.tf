@@ -6,7 +6,7 @@ module "ec2_cluster" {
   instance_count         = 1
 
   ami                    = "ami-07ebfd5b3428b6f4d"
-  instance_type          = "t2.medium"
+  instance_type          = "t2.large"
   key_name               = "${module.key_pair.this_key_pair_key_name}"
   vpc_security_group_ids = ["${data.terraform_remote_state.global_state.outputs.all_sg_id}"]
   subnet_id              = "${data.terraform_remote_state.global_state.outputs.public_subnets[0]}"

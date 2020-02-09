@@ -6,16 +6,28 @@ module "web_server_sg" {
   vpc_id      = "${module.vpc.vpc_id}"
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
+
+  tags = {
+    Terraform   = "true"
+    Name        = "Allow Web Server traffic"
+    Project     = "jrcms"
+  }
 }
 
 module "ssh_sg" {
   source = "terraform-aws-modules/security-group/aws//modules/ssh"
 
   name        = "ssh"
-  description = "Security group for ssh with HTTP ports open within VPC"
+  description = "Security group for ssh open within VPC"
   vpc_id      = "${module.vpc.vpc_id}"
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
+
+  tags = {
+    Terraform   = "true"
+    Name        = "Allow Web SSH traffic"
+    Project     = "jrcms"
+  }
 }
 
 resource "aws_security_group" "allow_all" {
@@ -35,6 +47,11 @@ resource "aws_security_group" "allow_all" {
     to_port         = 0
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
+  }
+  tags = {
+    Terraform   = "true"
+    Name        = "Allow all traffic for test purpose"
+    Project     = "jrcms"
   }
 }
 
