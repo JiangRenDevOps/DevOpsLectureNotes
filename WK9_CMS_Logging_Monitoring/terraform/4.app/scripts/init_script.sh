@@ -16,5 +16,5 @@ sed -i 's/ELK_IP/ELK_IP_PLACEHOLDER/g' site.yaml
 
 # try three times to work around an issue in geerlingguy.filebeat
 for i in 1 2 3; do
-    ansible-playbook $ansible_playbook | cat
+    sudo ansible-playbook $ansible_playbook | cat
 done

@@ -33,6 +33,15 @@ cd 1.s3-state
 ../terraform.sh apply
 ```
 
-# To distroy
+# To batch execute
 
-cd to individual folder and use `../terraform.sh destroy` to execute.
+execute `../setup_all.sh`
+
+
+# To batch destroy
+
+execute `../cleanup_all.sh` and remove the s3 bucket: s3-terraform-state-storage-* 
+
+# To check failure in a host
+
+ssh to the host and execute `cat /var/log/cloud-init-output.log`
