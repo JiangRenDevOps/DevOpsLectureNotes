@@ -26,6 +26,8 @@
             - type: docker
               containers.ids:
                 - "*"
+              json.keys_under_root: true
+              json.add_error_key: true
         filebeat_output_logstash_enabled: false
         filebeat_output_elasticsearch_enabled: true
         filebeat_output_elasticsearch_hosts:
@@ -75,8 +77,6 @@
       user: ubuntu
       tasks:
         - name: Start jrcms container
-          shell: |
-            cd /jrcms
-            docker-compose up > /var/log/app.log
+          shell: docker-compose -f /jrcms up
     
 
