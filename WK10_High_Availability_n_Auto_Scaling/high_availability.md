@@ -42,6 +42,11 @@ kind get cluster
 ```
 kubectl cluster-info
 ```
+![Alt text](./images/kube_history.png?raw=true)
+![Alt text](./images/cluster.png?raw=true)
+![Alt text](./images/node.png?raw=true)
+![Alt text](./images/pods.png?raw=true)
+
 
 # Autoscaling
 ```
