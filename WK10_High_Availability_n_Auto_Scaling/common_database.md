@@ -1,4 +1,4 @@
-Top used database management systems
+#Top used database management systems
 
 ![Alt text](./images/topdb.png?raw=true)
 
@@ -15,7 +15,14 @@ Apache Cassandra       4,686             < 5%
 
 ```
 https://enlyft.com/tech/products/apache-cassandra
+# RDBMS
+* RDBMS stands for Relational Database Management System.
 
+* SQL stands for Structured Query Language
+* SQL lets you access and manipulate database
+* SQL became a standard of the American National Standards Institute (ANSI) in 1986, and of the International Organization for Standardization (ISO) in 1987
+* Although SQL is an ANSI/ISO standard, there are different versions of the SQL language.
+* However, to be compliant with the ANSI standard, they all support at least the major commands (such as SELECT, UPDATE, DELETE, INSERT, WHERE) in a similar manner.
 ## Microsoft SQL Server 
 ![Alt text](./images/MicrosoftSQLServer.png?raw=true)
 This database management engine works on cloud-based servers as well as local servers, and it can be set up to work on both at the same time. 
@@ -83,6 +90,18 @@ __Cons__
 
 Ideal for: Organizations with a limited budget that want the ability to select their interface and use JSON.
 
+#NoSQL DB
+Developed in late 2000s to deal with limitations of SQL databases, especially scalability, multi-structured data, geo-distribution and agile development sprints
+NoSQL Database Types
+Document databases pair each key with a complex data structure known as a document. Documents can contain many different key-value pairs, or key-array pairs, or even nested documents.
+
+Graph stores are used to store information about networks of data, such as social connections. Graph stores include Neo4J and Giraph.
+
+Key-value stores are the simplest NoSQL databases. Every single item in the database is stored as an attribute name (or 'key'), together with its value. Examples of key-value stores are Riak and Berkeley DB. Some key-value stores, such as Redis, allow each value to have a type, such as 'integer', which adds functionality.
+
+Wide-column stores such as Cassandra and HBase are optimized for queries over large datasets, and store columns of data together, instead of rows
+
+More to read: https://www.mongodb.com/nosql-explained
 
 ## MongoDB
 
@@ -108,6 +127,14 @@ Cons
 
 
 ## Hadoop, Spark, Cassandra
+Apache Cassandra is one of the most popular NoSQL databases. It offers great performance and scalability without sacrificing availability. It has no Single Point of Failure (SPOF). The biggest, publicly announced cluster contains over 115k nodes and over 10PB of data. However, Cassandra data format differs from what you got used to in the SQL world. There are tables with special keys but without relations. What is the most important, it is not possible to query data using any arbitrary column. Cassandra is not perfect for every project, there are many mistakes which can be made when working with it. 
 https://dzone.com/articles/hadoop-vs-spark-a-head-to-head-comparison
 https://www.scnsoft.com/blog/cassandra-vs-hadoop
 
+# TimeSeries DB
+A time series database (TSDB) is a database optimized for time-stamped or time series data. Time series data are simply measurements or events that are tracked, monitored, downsampled, and aggregated over time. This could be server metrics, application performance monitoring, network data, sensor data, events, clicks, trades in a market, and many other types of analytics data.
+
+A time series database is built specifically for handling metrics and events or measurements that are time-stamped. A TSDB is optimized for measuring change over time. Properties that make time series data very different than other data workloads are data lifecycle management, summarization, and large range scans of many records.
+
+![Alt text](./images/timeseriesdata.png?raw=true)
+![Alt text](./images/timeseriesdb.png?raw=true)
